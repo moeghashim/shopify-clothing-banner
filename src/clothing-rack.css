@@ -1,0 +1,178 @@
+/*
+ * ClothingRack styles. Theme with CSS variables on .cr-stage (or any ancestor):
+ *   --cr-bg   wall colour           (default #e6e6e2)
+ *   --cr-ink  caption colour        (default #3d4670)
+ *   --cr-max  largest garment width (set from the maxGarmentWidth prop)
+ * Sizing follows the stage's own width (container query units), not the window.
+ */
+.cr-stage {
+  position: relative;
+  overflow: hidden;
+  container-type: inline-size;
+  color: var(--cr-ink, #3d4670);
+  background-color: var(--cr-bg, #e6e6e2);
+  background-image: radial-gradient(
+    circle at center,
+    transparent 2.6px,
+    rgba(40, 48, 80, 0.09) 3px,
+    rgba(40, 48, 80, 0.09) 3.8px,
+    transparent 4.2px
+  );
+  background-size: 34px 34px;
+}
+.cr-stage *,
+.cr-stage *::before,
+.cr-stage *::after {
+  box-sizing: border-box;
+}
+
+.cr-inner {
+  padding-block: 2.5rem 0.5rem;
+}
+@container (min-width: 640px) {
+  .cr-inner {
+    padding-block: 3.5rem 1rem;
+  }
+}
+@container (min-width: 768px) {
+  .cr-inner {
+    padding-block: 5rem 1rem;
+  }
+}
+
+/* --w is one garment's width; --slot and --pad set how tightly the garments hang. */
+.cr-root {
+  --pad: 0.25;
+  --slot: 0.32;
+  --w: clamp(64px, calc((100cqw - 64px) / var(--rack)), 160px);
+  position: relative;
+  margin-inline: 2rem;
+}
+@container (min-width: 768px) {
+  .cr-root {
+    --pad: 0.7;
+    --slot: 0.4;
+    --w: clamp(120px, calc((100cqw - 160px) / var(--rack)), var(--cr-max, 300px));
+    margin-inline: 5rem;
+  }
+}
+
+.cr-rod {
+  position: absolute;
+  inset-inline: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.cr-rod-shadow {
+  position: absolute;
+  inset-inline: 8px;
+  border-radius: 50%;
+  background: rgba(31, 36, 48, 0.3);
+  filter: blur(5px);
+}
+.cr-rod-tube {
+  position: relative;
+}
+.cr-rod-gloss {
+  position: absolute;
+  inset-inline: 0;
+}
+.cr-abs {
+  position: absolute;
+}
+.cr-screw {
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+  border-radius: 50%;
+}
+
+.cr-rack {
+  position: relative;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.cr-item {
+  position: absolute;
+  top: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+}
+.cr-swing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--w);
+  translate: -50% 0;
+}
+.cr-layer {
+  display: block;
+  transform-origin: 50% 0;
+}
+.cr-layer-side {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+}
+/* Layers are promoted only while something is moving. */
+.cr-rack[data-moving="true"] .cr-swing {
+  will-change: transform;
+}
+.cr-rack[data-moving="true"] .cr-layer {
+  will-change: transform, opacity;
+}
+.cr-img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  -webkit-user-drag: none;
+}
+.cr-hook {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  overflow: visible;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+}
+.cr-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--w);
+  translate: -50% 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  outline: none;
+  appearance: none;
+  pointer-events: none;
+}
+.cr-button:focus-visible {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--cr-ink, #3d4670) 60%, transparent);
+}
+
+.cr-caption {
+  height: 1.25rem;
+  margin: 3.5rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  text-align: center;
+  color: color-mix(in srgb, var(--cr-ink, #3d4670) 70%, transparent);
+}
+@container (min-width: 768px) {
+  .cr-caption {
+    margin-top: 4rem;
+  }
+}
