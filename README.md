@@ -2,11 +2,17 @@
 
 A homepage banner for clothing stores: garments hang from a chrome rail, and they move the way clothes on hangers really do. Hover (or drag a finger) across the rack and the garment under the pointer swings round to face you while its neighbours slide aside, overshoot a little, and sway.
 
+**[Live demo](https://moeghashim.github.io/shopify-clothing-banner/)** · [Watch the video](docs/how-it-works.mp4) · [Use it](#quick-start) · [MIT licence](LICENSE)
+
 [![Watch the demo](docs/poster.jpg)](docs/how-it-works.mp4)
 
 ![The banner in action](docs/how-it-works.gif)
 
-It is one React component and one stylesheet. No animation library, no Tailwind, no Shopify SDK: it takes a list of garments and draws the rack. It was built for a Shopify storefront ([shirtat.co](https://shirtat.co)), which is where the name comes from, and it works with any data source.
+## Why it exists
+
+Most clothing-store hero banners are a static photo or a carousel. A rail of hanging garments says "this is a shop" at a glance and invites touching, but it only works if the motion is believable: a tee that slides sideways like a card feels fake. This component simulates the hanger instead of animating a transition, so the movement stays natural whichever garment you move to, in either direction, at any speed.
+
+It is one React component and one stylesheet. No animation library, no Tailwind, no Shopify SDK: it takes a list of garments and draws the rack. It was built for a Shopify storefront ([shirtat.co](https://shirtat.co), which is where the name comes from), and it works with any data source.
 
 ## What you get
 
