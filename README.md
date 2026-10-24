@@ -73,7 +73,7 @@ import Image from "next/image";
 | `disabled` | `boolean` | `false` | Ignore hover and touch while something else (a dialog) is in front. |
 | `onSelect` | `(index, item) => void` | navigates to `item.href` | Called on click or tap. |
 | `tapHint` | `string` | `"Tap to view"` | Hint shown beside the name on touch devices. |
-| `renderImage` | `({ src, priority }) => ReactNode` | plain `<img>` | Swap in your framework's image component. |
+| `renderImage` | `({ src, priority }) => ReactNode` | plain `<img>` | Swap in your framework's image component. `priority` is true only for the open garment's front photo, so preload just that one. |
 | `maxGarmentWidth` | `number` | `300` | Largest garment width in px on wide containers. |
 | `className` | `string` | | Added to the outer element. |
 

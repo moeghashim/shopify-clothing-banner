@@ -537,16 +537,16 @@ export function ClothingRack({
                       }}
                     >
                       {renderImage ? (
-                        renderImage({ priority: sideNeeded, src: item.sideImage })
+                        renderImage({ priority: false, src: item.sideImage })
                       ) : (
                         <img
                           alt=""
                           className="cr-img"
                           decoding="async"
                           draggable={false}
-                          fetchPriority={sideNeeded ? undefined : "low"}
+                          fetchPriority="low"
                           height={960}
-                          loading={sideNeeded ? undefined : "eager"}
+                          loading="eager"
                           src={item.sideImage}
                           width={800}
                         />
@@ -568,16 +568,16 @@ export function ClothingRack({
                       }}
                     >
                       {renderImage ? (
-                        renderImage({ priority: frontNeeded, src: item.image })
+                        renderImage({ priority: isDefault, src: item.image })
                       ) : (
                         <img
                           alt=""
                           className="cr-img"
                           decoding="async"
                           draggable={false}
-                          fetchPriority={frontNeeded ? undefined : "low"}
+                          fetchPriority={isDefault ? "high" : "low"}
                           height={960}
-                          loading={frontNeeded ? undefined : "eager"}
+                          loading="eager"
                           src={item.image}
                           width={800}
                         />
